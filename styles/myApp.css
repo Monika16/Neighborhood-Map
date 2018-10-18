@@ -1,0 +1,97 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#rimg {
+  width: 200px;
+  height: 200px;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+  display: block;
+}
+
+.options-box {
+  background: #000000;
+  border: 1px solid #999;
+  border-radius: 3px;
+  height: 100%;
+  line-height: 35px;
+  padding: 10px 10px 30px 10px;
+  text-align: left;
+  width: 340px;
+  color: #ffff;
+}
+
+.buttons {
+  width: 48%;
+}
+
+#map {
+  bottom: 0;
+  left: 362px;
+  position: absolute;
+  right: 0;
+  top: 10%;
+  overflow: hidden;
+  height: 100%;
+}
+
+#topnav {
+  background: #000000;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  height: 10%;
+  right: 0px;
+  left: 362px;
+}
+
+#toggle {
+  position: absolute;
+  top: 30%;
+  border: 0;
+  color: #ffff;
+  background-color: #000000;
+  font-size: 25px;
+}
+
+
+@media screen and (max-width: 600px){
+
+#map {
+  left: 0;
+}
+
+#topnav {
+  left: 0;
+}
+
+.container {
+  top: 10%;
+  z-index: 2;  /*to position it in front of the other content */
+  position: absolute;
+  overflow: hidden; /* to prevent scrollbar appearing */
+  left: 0;
+}
+
+.options-box {
+  transition: all .5s ease;
+}
+
+.container .options-box {
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+}
+
+.container.show .options-box {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+
+}
+
