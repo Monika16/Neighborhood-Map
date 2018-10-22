@@ -1,3 +1,4 @@
+
 /* List of locations to be shown on map */
 var locations = [
 	{
@@ -83,21 +84,37 @@ function populateInfoWindow(marker, map, position, infowindow){
 			},
 			error: function(data){
 				console.log(data);
+				alert("Error loading InfoWindow- "+data.status+" : "+data.statusText);
 			}
 		});
 	};
 };
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    var string = msg.toLowerCase();
+    var substring = "script error";
+    if (string.indexOf(substring) > -1){
+        alert('Script Error: See Browser Console for Detail');
+    } else {
+        var message = [
+            'Message: ' + msg,
+            'URL: ' + url,
+            'Line: ' + lineNo,
+            'Column: ' + columnNo,
+            'Error object: ' + JSON.stringify(error)
+        ].join(' - ');
 
+        alert(message);
+    }
+    return false;
+};
 var viewModel = function(){
 	var self = this;
 	this.restaurants = ko.observableArray([]);
 	this.filterText = ko.observable('');
-
 	var map = new google.maps.Map(document.getElementById('map'),{
 		center: {lat: 47.776857, lng: -122.204997},
 		zoom: 13
 	});
-
 	var largeInfoWindow = new google.maps.InfoWindow();
 
 	/* Marker Image */
@@ -161,16 +178,15 @@ var viewModel = function(){
 		for(var i=0; i<markers.length; i++){
 			if(clickedLoc.title == markers[i].title){
 				/* if show Listings button is already pressed, then 
-				infowindow of the clicked location is open */
-				if(listings){
-					position.lat=markers[i].getPosition().lat();
-					position.lng=markers[i].getPosition().lng();
-					populateInfoWindow(markers[i], map, position, largeInfoWindow);
-				}
-				/* else the Marker for the clicked location in set*/
-				else{
+				infowindow of the clicked location is open else marker is set and
+				infowindow is open*/
+				if(!listings){
 					markers[i].setMap(map);
 				}
+				position.lat=markers[i].getPosition().lat();
+				position.lng=markers[i].getPosition().lng();
+				var info = populateInfoWindow(markers[i], map, position, largeInfoWindow);
+				google.maps.event.trigger(info,'click');
 			}
 			bounds.extend(markers[i].position);
 		}
@@ -181,16 +197,17 @@ var viewModel = function(){
 	this.filterList = function(){
 		self.restaurants.removeAll();
 		var bounds = new google.maps.LatLngBounds();
+		var text = self.filterText();
 		for(var i=0; i<locations.length; i++){
 			markers[i].setMap(null);
-			if((locations[i].title).includes(self.filterText())){
+			if((locations[i].title).includes(text)){
 				listings = true;
 				self.restaurants.push(locations[i]);
 				for(var j=0; j<markers.length; j++){
 					if(locations[i].title == markers[j].title){
 						markers[j].setMap(map);
+						bounds.extend(markers[j].position);
 					}
-					bounds.extend(markers[j].position);
 				}
 			}
 		}

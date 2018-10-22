@@ -20,7 +20,7 @@ It is built with the help of Knockout framework.
 	2. Click on `Hide Listings` button to hide the markers from the map.
 	3. To see the information on a particular location, click on the marker on the map.
 	4. If markers are already present on the map, and you click on a particular location from the list then it will open the infowindow of that particular location on the map.
-	5. If markers are not present on the map, then on a click on a location will set a marker on the map.
+	5. If markers are not present on the map, then on a click on a location will set a marker on the map and will populate the infoWindow.
 	6. To Filter the locations, provide input in the input field and click the `Filter` button.
 4. Mobile View:
 	1. Click on the Hamburger icon to view the list.
