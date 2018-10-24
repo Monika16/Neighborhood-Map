@@ -3,18 +3,15 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
 #rimg {
   width: 200px;
   height: 200px;
 }
-
 .container {
   height: 100%;
   position: relative;
   display: block;
 }
-
 .options-box {
   background: #000000;
   border: 1px solid #999;
@@ -26,11 +23,9 @@ html, body {
   width: 340px;
   color: #ffff;
 }
-
 .buttons {
   width: 45%;
 }
-
 #map {
   bottom: 0;
   left: 362px;
@@ -40,7 +35,6 @@ html, body {
   overflow: auto;
   height: 100%;
 }
-
 #topnav {
   background: #000000;
   overflow: hidden;
@@ -50,7 +44,6 @@ html, body {
   right: 0px;
   left: 362px;
 }
-
 #toggle {
   position: absolute;
   top: 20%;
@@ -59,52 +52,40 @@ html, body {
   background-color: #000000;
   font-size: 25px;
 }
-
 #content {
   height: auto;
   width: auto;
   overflow: auto;
 }
-
-@media screen and (max-width: 600px){
-
-#map {
-  top: 10%;
-  left: 0;
+@media screen and (max-width: 600px) {
+  #map {
+    top: 10%;
+    left: 0;
+  }
+  #topnav {
+    left: 0;
+  }
+  .container {
+    top: 10%;
+    z-index: 2;
+    /*to position it in front of the other content */
+    position: absolute;
+    left: 0;
+  }
+  .options-box {
+    overflow: auto;
+    transition: all .5s ease;
+  }
+  .container .options-box {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+  .container.show .options-box {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+  }
+  #content {
+    height: 200px;
+    width: 300px;
+  }
 }
-
-#topnav {
-  left: 0;
-}
-
-.container {
-  top: 10%;
-  z-index: 2;  /*to position it in front of the other content */
-  position: absolute; 
-  left: 0;
-}
-
-.options-box {
-   overflow: auto;
-  transition: all .5s ease;
-}
-
-.container .options-box {
-  transform: translateX(-100%);
-  -webkit-transform: translateX(-100%);
-}
-
-.container.show .options-box {
-  transform: translateX(0);
-  -webkit-transform: translateX(0);
-}
-
-#content {
-  height: 200px;
-  width:300px;
-}
-
-}
-
-
-
